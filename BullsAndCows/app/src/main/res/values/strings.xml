@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BullsAndCows</string>
+    <string name="description">      You are playing the following Bulls and Cows game. Guess the number</string>
+    <string name="title_activity_start_game">StartGame</string>
+    <string name="userName">Username</string>
+    <string name="popup">User is already in the list. Do you want to overwrite it?</string>
+    <string name="rules">A -> how many digits match the secret number, locate in the right position \nB -> how many digits match the secret number but locate in the wrong position </string>
+</resources>
