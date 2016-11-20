@@ -34,6 +34,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/send"
         android:text="Send"
+        android:textColor="@color/orangeRed"
+
         android:layout_marginTop="50dp"
         android:layout_below="@+id/numberSent"
         android:layout_centerHorizontal="true"
@@ -48,16 +50,14 @@
         android:layout_below="@+id/numberSent"
         android:visibility="invisible"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/orangeRed"
         style="@style/Widget.AppCompat.Button.Borderless" />
-
-
-
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/numberSent"
-        android:hint="Enter the number"
+        android:hint="@string/enterNumber"
         android:textStyle="bold"
         android:layout_below="@+id/result"
         android:layout_alignParentLeft="true"

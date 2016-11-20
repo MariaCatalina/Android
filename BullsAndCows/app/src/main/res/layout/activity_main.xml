@@ -25,7 +25,7 @@
         app:ettEmptyText="Add username&#8230;"
 
         android:layout_below="@id/image"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="0dp"
         android:inputType="text"
         android:imeOptions="actionSend"
             />
@@ -38,8 +38,8 @@
         android:textColor="@color/gray"
         app:sub_btn_background="@color/white"
         app:sub_btn_duration="2000"
-        app:sub_btn_line_color="@color/green"
-        app:sub_btn_ripple_color="@color/green"
+        app:sub_btn_line_color="@color/orangeRed"
+        app:sub_btn_ripple_color="@color/orangeRed"
         app:sub_btn_tick_color="@color/white"
         android:id="@+id/validateUser"
         android:layout_below="@id/userName"
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/startGame"
             android:text="Start"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/orangeRed"
             style="@style/Widget.AppCompat.Button.Borderless"
 
             android:layout_marginLeft="39dp"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/winnersList"
             android:text="Winners"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/orangeRed"
             style="@style/Widget.AppCompat.Button.Borderless"
 
             android:layout_marginLeft="39dp"
@@ -85,12 +85,12 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/guess"
+        android:src="@drawable/guessh"
         android:id="@+id/image"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="-60dp"
-        android:layout_marginBottom="-60dp"/>
+        android:layout_marginTop="0dp"
+        />
 
 </RelativeLayout>

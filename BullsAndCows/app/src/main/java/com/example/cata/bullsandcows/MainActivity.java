@@ -1,5 +1,8 @@
 package com.example.cata.bullsandcows;
 
+import android.app.DialogFragment;
+import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +19,12 @@ import com.example.cata.bullsandcows.enums.IntentKey;
 import com.gregacucnik.EditTextView;
 import com.spark.submitbutton.SubmitButton;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditTextView userName;
 
+    private final String fileName = "userData.txt";
     Winners winnersList = Winners.getInstance();
 
     @Override
@@ -53,48 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.v("new user", user);
 
-                    //show popup
-                    LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View popupView = layoutInflater.inflate(R.layout.popup, null);
+                    DialogFragment newFragment = new OverrideUsername();
+                    newFragment.show(getFragmentManager(), "missiles");
 
-                    final PopupWindow popupWindow = new PopupWindow(popupView,
-                                                                    ActionBar.LayoutParams.WRAP_CONTENT,
-                                                                    ActionBar.LayoutParams.MATCH_PARENT, true);
-
-                    popupWindow.setTouchable(true);
-                    popupWindow.setFocusable(true);
-
-                    popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-                    Log.v("popup: ", String.valueOf(popupView.isShown()));
-
-                    Button popupYes = (Button) popupView.findViewById(R.id.popupYes);
-                    Button popupNo = (Button) popupView.findViewById(R.id.popupNo);
-
-                    popupYes.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            Log.v("popup: ", "yes button");
-
-                            // rescriu rezultatul
-                            winnersList.addUser(user, 0);
-                            startGameButton.setEnabled(true);
-                            popupWindow.dismiss();
-                        }
-
-                    });
-
-                    popupNo.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            Log.v("popup NO:", "popup");
-                            popupWindow.dismiss();
-                            userName.setText("");
-                            startGameButton.setEnabled(false);
-
-                            Toast.makeText(getApplicationContext(), "Enter a new username", Toast.LENGTH_LONG).show();
-                        }
-
-                    });
 
                 } else if (!winnersList.contains(user)) {
+
+                    String data = user + ":" + 0;
+
+                    Log.v("Write in file:", data);
+                    writeToFile(data, getApplicationContext());
+
 
                     winnersList.addUser(user, 0);
                     startGameButton.setEnabled(true);
@@ -128,9 +107,53 @@ public class MainActivity extends AppCompatActivity {
 
         showWinners.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                String read = readFromFile(getApplicationContext());
+                Log.v("from file:", read);
+
                 Intent intent = new Intent(MainActivity.this, WinnersActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    private void writeToFile(String data, Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    private String readFromFile(Context context) {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput(fileName);
+
+            if (inputStream != null) {
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
     }
 }
