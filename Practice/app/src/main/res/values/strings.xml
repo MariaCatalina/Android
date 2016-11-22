@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Home</string>
+    <string name="description">TOTAL KILOMETERS</string>
+    <string name="text_cell">Compare and compete with your friends by adding them on Nike+.</string>
+
+
+    <string name="ben_krush">ben_krush</string>
+    <string name="roman_italic">roman_italic</string>
+    <string name="roboto_light">roboto_light</string>
+    <string name="tabassom_narmal">tabassom_normal</string>
+</resources>
