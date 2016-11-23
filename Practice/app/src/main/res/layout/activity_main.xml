@@ -4,9 +4,6 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
-
     android:paddingTop="10dp"
     tools:context="com.example.cata.practice.MainActivity"
 
@@ -16,7 +13,7 @@
     <com.example.cata.practice.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/kmValue"
+        android:id="@+id/totalKm"
         android:text="101.4"
         android:textSize="80dp"
         android:textColor="@color/colorRed"
@@ -28,7 +25,7 @@
     <com.example.cata.practice.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/kmValue"
+        android:layout_below="@id/totalKm"
         android:id="@+id/description"
         android:text="@string/description"
         android:textSize="25dp"
@@ -44,7 +41,6 @@
         android:gravity="center"
         android:layout_marginTop="15dp"
         android:id="@+id/values"
-
 
         >
 

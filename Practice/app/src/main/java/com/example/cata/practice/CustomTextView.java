@@ -13,6 +13,12 @@ import android.widget.TextView;
 
 public class CustomTextView extends TextView {
 
+    private final static String FONT_BEN_KRUSH = "ben_krush";
+    private final static String FONT_ROMAN_ITALIC = "roman_italic";
+    private final static String FONT_ROBOTO_LIGHT = "roboto_light";
+    private final static String FONT_TABASSOM_NORMAL ="tabassom_normal";
+
+
     public CustomTextView(Context context) {
         super(context);
         setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/ben-krush.ttf"));
@@ -36,37 +42,31 @@ public class CustomTextView extends TextView {
         String fontName = attributeArray.getString(R.styleable.CustomFontTextView_font);
 
         selectTypeface(context, fontName);
-        //setTypeface(customFont);
     }
 
     private void selectTypeface(Context context, String fontName){
 
         Log.v("FONT:", fontName);
         switch (fontName){
-            case "ben_krush":
+            case FONT_BEN_KRUSH:
                 setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/ben-krush.ttf"));
                 break;
-            case "roman_italic":
+
+            case FONT_ROMAN_ITALIC:
                 setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/roman_italic.ttf"));
                 break;
 
-            case "roboto_light":
+            case FONT_ROBOTO_LIGHT:
                 setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf"));
                 break;
 
-            case "tabassom_normal":
+            case FONT_TABASSOM_NORMAL:
                 setTypeface(Typeface.createFromAsset(context.getAssets(),  "fonts/tabassom_normal.ttf"));
                 break;
 
             default:
                 setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/tabassom_normal.ttf"));
         }
-
-
-//        if (fontName.contains(context.getString(R.string.ben_krush)))
-//            setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/ben-krush.ttf"));
-//        else
-//            setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/roman_italic.ttf"));
 
     }
 }
