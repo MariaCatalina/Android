@@ -32,4 +32,6 @@ dependencies {
     compile 'me.spark:submitbutton:1.0.1'
     compile 'com.orhanobut:simplelistview:1.3@aar'
 
+    compile 'com.github.ivbaranov:materiallettericon:0.2.2'
+
 }

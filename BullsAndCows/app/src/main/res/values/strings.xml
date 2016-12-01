@@ -8,4 +8,14 @@
     <string name="enterNumber">Enter the number</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+
+    <string name="ben_krush">ben_krush</string>
+    <string name="roman_italic">roman_italic</string>
+    <string name="roboto_light">roboto_light</string>
+    <string name="tabassom_narmal">tabassom_normal</string>
+
+    <string name="winnerDilog">You win, please check the winners button to seen on what position you are</string>
+    <string name="winnerDialogYes">Return to main activity</string>
+    <string name="winnerDialogNo">Restart Game</string>
 </resources>

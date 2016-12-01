@@ -16,8 +16,9 @@
         android:id="@+id/userName"
         android:layout_width="3000dp"
         android:layout_height="50dp"
-        app:ettIcon="@drawable/username"
-        app:ettIconInEditMode="@drawable/userred"
+        app:ettIcon="@drawable/dark_blue"
+        app:ettIconInEditMode="@drawable/user_red"
+        app:ettIconEmpty="@drawable/user_blue"
         android:gravity="left"
         app:ettEmptyTexStyle="normal"
         app:ettTextMarginLeft="0dp"
@@ -37,9 +38,9 @@
 
         android:textColor="@color/gray"
         app:sub_btn_background="@color/white"
-        app:sub_btn_duration="2000"
-        app:sub_btn_line_color="@color/orangeRed"
-        app:sub_btn_ripple_color="@color/orangeRed"
+        app:sub_btn_duration="1500"
+        app:sub_btn_line_color="@color/blue2"
+        app:sub_btn_ripple_color="@color/blue3"
         app:sub_btn_tick_color="@color/white"
         android:id="@+id/validateUser"
         android:layout_below="@id/userName"
@@ -56,7 +57,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/startGame"
             android:text="Start"
-            android:textColor="@color/orangeRed"
+            android:textColor="@color/blue5"
             style="@style/Widget.AppCompat.Button.Borderless"
 
             android:layout_marginLeft="39dp"
@@ -71,7 +72,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/winnersList"
             android:text="Winners"
-            android:textColor="@color/orangeRed"
+            android:textColor="@color/blue5"
             style="@style/Widget.AppCompat.Button.Borderless"
 
             android:layout_marginLeft="39dp"
@@ -82,15 +83,11 @@
 
     </LinearLayout>
 
+
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/guessh"
-        android:id="@+id/image"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="0dp"
-        />
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:src="@drawable/guess4"
+        android:id="@+id/image"        />
 
 </RelativeLayout>

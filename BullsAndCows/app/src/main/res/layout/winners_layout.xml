@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin= "10dp"
+        android:orientation="horizontal"
+        >
+
+        <com.github.ivbaranov.mli.MaterialLetterIcon
+            android:layout_width="@dimen/letter_icon_size"
+            android:layout_height="@dimen/letter_icon_size"
+            android:id="@+id/icon"
+
+            app:mli_letter="C"
+            app:mli_shape_type="circle"
+            app:mli_shape_color="@color/blue5"
+
+            />
+        <com.example.cata.bullsandcows.fonts.CustomTextView
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/userName"
+            android:layout_marginLeft="5dp"
+            android:textSize="20dp"
+            app:font = "@string/ben_krush"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:textColor="@color/blue3"
+            />
+
+        <com.example.cata.bullsandcows.fonts.CustomTextView
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/userScore"
+            android:layout_marginLeft="5dp"
+            android:textSize="25dp"
+
+            app:font = "@string/ben_krush"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:textColor="@color/blue4"
+
+            />
+    </LinearLayout>
+
+</RelativeLayout>

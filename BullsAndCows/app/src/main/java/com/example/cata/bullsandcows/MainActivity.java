@@ -2,20 +2,16 @@ package com.example.cata.bullsandcows;
 
 import android.app.DialogFragment;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import com.example.cata.bullsandcows.enums.IntentKey;
+import com.example.cata.bullsandcows.enums.Keys;
+import com.example.cata.bullsandcows.models.User;
 import com.gregacucnik.EditTextView;
 import com.spark.submitbutton.SubmitButton;
 
@@ -35,20 +31,25 @@ public class MainActivity extends AppCompatActivity {
     private Button showWinners;
 
     private SubmitButton validateButton;
+    private EditTextView userNameTextView;
 
-    private EditTextView userName;
+    private static final String fileName = "winners.txt";
+    private UsersData userList = UsersData.getInstance();
 
-    private final String fileName = "userData.txt";
-    Winners winnersList = Winners.getInstance();
+    private static final String TAG = MainActivity.class.toString();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userName = (EditTextView) findViewById(R.id.userName);
+        userNameTextView = (EditTextView) findViewById(R.id.userName);
         startGameButton = (Button) findViewById(R.id.startGame);
         showWinners = (Button) findViewById(R.id.winnersList);
+
+        /* get users from file */
+        prepareData();
+        Log.i(TAG, "onCreate: data from file" + userList.getUsers().toString());
 
         /*  */
         validateButton = (SubmitButton) findViewById(R.id.validateUser);
@@ -56,30 +57,33 @@ public class MainActivity extends AppCompatActivity {
         /* user verification */
         validateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                user = userName.getText();
+                user = userNameTextView.getText();
                 if (user.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Enter a valid user", Toast.LENGTH_LONG).show();
-                } else if (winnersList.contains(user)) {
+                    Toast.makeText(getApplicationContext(), "Please enter a valid name", Toast.LENGTH_SHORT).show();
+                } else if (userList.contains(user)) {
 
                     Log.v("new user", user);
 
                     DialogFragment newFragment = new OverrideUsername();
                     newFragment.show(getFragmentManager(), "missiles");
 
+                    /* send userName to dialog */
+                    Bundle arguments = new Bundle();
+                    arguments.putString(Keys.USERNAME.toString(), user);
+                    newFragment.setArguments(arguments);
 
-                } else if (!winnersList.contains(user)) {
-
-                    String data = user + ":" + 0;
-
-                    Log.v("Write in file:", data);
-                    writeToFile(data, getApplicationContext());
-
-
-                    winnersList.addUser(user, 0);
                     startGameButton.setEnabled(true);
+                    userNameTextView.setText("");
 
-                    userName.setText("");
-                    Toast.makeText(getApplicationContext(), "User valid", Toast.LENGTH_LONG).show();
+                } else if (!userList.contains(user)) {
+
+                    userList.addUser(new User(user, 0));
+
+                    startGameButton.setEnabled(true);
+                    userNameTextView.setText("");
+                    Toast.makeText(getApplicationContext(), "User valid", Toast.LENGTH_SHORT).show();
+
+                    validateButton.refreshDrawableState();
                 }
             }
         });
@@ -91,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
                 /* generate the secret number */
                 int secretNumber = rand.nextInt(10000) + 1;
-                intent.putExtra(IntentKey.SECRETNUMBER.toString(), String.valueOf(secretNumber));
-                intent.putExtra(IntentKey.USERNAME.toString(), user);
+                intent.putExtra(Keys.SECRETNUMBER.toString(), String.valueOf(secretNumber));
+                intent.putExtra(Keys.USERNAME.toString(), user);
 
                 startActivity(intent);
 
@@ -102,29 +106,48 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        /* read from file */
-
         showWinners.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                String read = readFromFile(getApplicationContext());
-                Log.v("from file:", read);
-
                 Intent intent = new Intent(MainActivity.this, WinnersActivity.class);
                 startActivity(intent);
+
+                /* write data in file */
+                writeToFile(userList.getUserDataFile(), MainActivity.this);
             }
         });
     }
 
     private void writeToFile(String data, Context context) {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, MainActivity.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
+    }
+
+    /**
+     * read data from file and parse to create the users
+     */
+    private void prepareData() {
+        /* clean the list */
+        userList.getUsers().clear();
+
+        /* read from file and compose results */
+        String fileData = readFromFile(getApplicationContext());
+        Log.i(TAG, "prepareData: " + fileData);
+
+        String[] parser = fileData.split("-");
+
+        Log.i(TAG, "prepareData: " + parser);
+
+        for(int i = 0; i < parser.length; i ++){
+            String[] data = parser[i].split(":");
+            userList.addUser(new User(data[0], Integer.valueOf(data[1])));
+        }
+
+        Log.i(TAG, "prepareData: " + userList);
     }
 
     private String readFromFile(Context context) {
@@ -156,4 +179,6 @@ public class MainActivity extends AppCompatActivity {
 
         return ret;
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.cata.bullsandcows;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cata.bullsandcows.enums.IntentKey;
+import com.example.cata.bullsandcows.enums.Keys;
 import com.example.cata.bullsandcows.enums.Logs;
 
 import java.util.*;
 
 public class StartGame extends AppCompatActivity {
+    private static final String TAG = StartGame.class.toString();
     private String secret;
     private EditText numberSend;
     private TextView resultTextView;
@@ -27,7 +29,7 @@ public class StartGame extends AppCompatActivity {
     private Button startAgainButton;
     private int counterRounds = 0;
 
-    private Winners winnersList = Winners.getInstance();
+    private UsersData usersList = UsersData.getInstance();
     private String userName;
 
     private final static String winner = "WINNER";
@@ -52,8 +54,8 @@ public class StartGame extends AppCompatActivity {
         /* extract the secret number and the userName */
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            secret = extras.getString(IntentKey.SECRETNUMBER.toString());
-            userName = extras.getString(IntentKey.USERNAME.toString());
+            secret = extras.getString(Keys.SECRETNUMBER.toString());
+            userName = extras.getString(Keys.USERNAME.toString());
         }
 
         sendNumberButton.setOnClickListener(new View.OnClickListener() {
@@ -82,8 +84,8 @@ public class StartGame extends AppCompatActivity {
                 int secretNumber = rand.nextInt(10000) + 1;
 
                 Intent intent = new Intent(StartGame.this, StartGame.class);
-                intent.putExtra(IntentKey.SECRETNUMBER.toString(), String.valueOf(secretNumber));
-                intent.putExtra(IntentKey.USERNAME.toString(), userName);
+                intent.putExtra(Keys.SECRETNUMBER.toString(), String.valueOf(secretNumber));
+                intent.putExtra(Keys.USERNAME.toString(), userName);
 
                 finish();
                 startActivity(intent);
@@ -162,7 +164,7 @@ public class StartGame extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; goto parent activity.
-                Log.v(Logs.BACKBUTTON.toString(), "back button pressed");
+                Log.v(TAG, "back button pressed");
 
                 this.finish();
                 return true;
@@ -181,8 +183,8 @@ public class StartGame extends AppCompatActivity {
             return;
         }
 
-        Log.v("from edit text:", guess);
-        Log.v("secret number:", secret);
+        Log.v(TAG, guess);
+        Log.v(TAG, secret);
 
         /* increase the number of rounds */
         counterRounds++;
@@ -198,7 +200,7 @@ public class StartGame extends AppCompatActivity {
 
         if (sendText.contains(winner)) {
 
-            winnersList.addValue(userName, counterRounds);
+            usersList.addScore(userName, counterRounds);
 
             /* show start again button and hide start button */
             sendNumberButton.setEnabled(false);

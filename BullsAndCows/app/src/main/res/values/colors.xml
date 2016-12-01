@@ -8,4 +8,10 @@
     <color name="white">#F2F3F4</color>
     <color name="orangeRed">#ec5454</color>
 
+    <color name="lightBlue">#07efeb</color>
+    <color name="blue2">#1ec4dc</color>
+    <color name="blue3">#369acd</color>
+    <color name="blue4">#4d6fbe</color>
+    <color name="blue5">#6644af</color>
+
 </resources>
