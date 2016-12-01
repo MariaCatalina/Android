@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         userNameTextView = (EditTextView) findViewById(R.id.userName);
         startGameButton = (Button) findViewById(R.id.startGame);
         showWinners = (Button) findViewById(R.id.winnersList);
-
+        
         /* get users from file */
         prepareData();
         Log.i(TAG, "onCreate: data from file" + userList.getUsers().toString());
