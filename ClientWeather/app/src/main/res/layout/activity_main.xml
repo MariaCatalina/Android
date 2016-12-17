@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.cata.clientweather.weatherapp.MainActivity"
+   >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/clouds_background"
+        android:alpha="0.7"
+        >
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="22dp"
+        android:textColor="#000000"
+        android:id="@+id/progmnoza"
+        android:alpha="1"
+        android:gravity="center"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/progmnoza"
+        android:layout_marginTop="10dp"
+        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView"
+        android:scrollbars="horizontal"
+
+        android:alpha="1"
+
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/recyclerView"
+        android:id="@+id/recyclerDays"
+        android:scrollbars="vertical"
+        android:alpha="1"
+
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>
