@@ -1,0 +1,20 @@
+#
+# generated on 2017/03/22 09:17:52
+#
+# --table-start--
+dataClass=catalina.dev.sqltutorial.Note
+tableName=notes
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=title
+# --field-end--
+# --field-start--
+fieldName=content
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
